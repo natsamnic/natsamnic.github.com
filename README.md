@@ -1,4 +1,4 @@
-natsamnic.github.com
+natsn.github.com
 ====================
 
 portfolio
