@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>portfolio</title>
+  <link rel="stylesheet" type="text/css" href="animation.css">
   <style type="text/css">
     body{
       margin:30px auto;
@@ -13,8 +14,11 @@
   </style>
 </head>
 <body>
-  <a href="http://google.com/">
-  <img src="leaf-current.svg" style="position:absolute;top:30px;left:90px;transform:rotate(-50deg)">
+  <a href="http://google.com/" style='color:white;text-weight:bold;'>
+    <span style="position:absolute;top:30px;left:90px;">
+      <p style='position:relative;top:90px;left:20px;z-index:100;'>google</p>
+      <img src="leaf-current.svg" style="transform:rotate(-50deg);" class='tossing'>
+    </span>
   </a>
   <img src="leaf-seen.svg" style="position:absolute;top:200px;left:90px;transform:rotate(-30deg)">
   <img src="leaf-unseen.svg" style="position:absolute;top:30px;left:300px;transform:rotate(30deg)">
