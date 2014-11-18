@@ -34,7 +34,7 @@ i{
 }
 
 /* responsive */
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 800px) {
   /* rules that only apply for canvases narrower than 1000px */
     body{
         padding:.5em; 
@@ -43,7 +43,6 @@ i{
         text-align: center;
     }
     #poetry{
-        
         text-align: center;
     }
 }

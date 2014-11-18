@@ -31,7 +31,7 @@ i {
   text-align: justify; }
 
 /* responsive */
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 800px) {
   /* rules that only apply for canvases narrower than 1000px */
   body {
     padding: 0.5em; }
