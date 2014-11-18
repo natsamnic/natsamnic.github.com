@@ -1,0 +1,21 @@
+{
+  "name": "natsn.github.io",
+  "version": "0.0.0",
+  "homepage": "https://github.com/natsn/natsn.github.io",
+  "authors": [
+    "Nate Nichols <nathann@ori.org>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handlebars": "~2.0.0",
+    "underscore": "~1.7.0",
+    "backbone": "~1.1.2"
+  }
+}

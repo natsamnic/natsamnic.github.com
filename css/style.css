@@ -1,0 +1,41 @@
+body {
+  color: #ffffff;
+  background: #ffffff url("../img/bg.jpg") no-repeat 50% 50% fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 2.5em; }
+
+#nav ul {
+  list-style: none;
+  padding: 0px; }
+  #nav ul a {
+    color: #fff;
+    font-size: 4em;
+    font-family: 'Oswald', sans-serif; }
+
+#logo {
+  max-width: 100%; }
+
+i {
+  color: #000; }
+
+#poetry {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1em;
+  font-size: 1.8rem;
+  font-family: 'Libre Baskerville', Baskerville, 'Book Antiqua', Georgia, Times, serif;
+  max-width: 600px;
+  line-height: 2.4rem;
+  text-align: justify; }
+
+/* responsive */
+@media only screen and (max-width: 500px) {
+  /* rules that only apply for canvases narrower than 1000px */
+  body {
+    padding: 0.5em; }
+  .work {
+    text-align: center; }
+  #poetry {
+    text-align: center; } }
