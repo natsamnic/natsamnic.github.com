@@ -32,17 +32,3 @@ i{
     line-height: 2.4rem;
     text-align: justify;
 }
-
-/* responsive */
-@media only screen and (max-width: 1000px) {
-  /* rules that only apply for canvases narrower than 1000px */
-    body{
-        padding:.5em; 
-    }
-    .work{
-        text-align: center;
-    }
-    #poetry{
-        text-align: center;
-    }
-}
