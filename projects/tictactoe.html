@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <style type="text/css">
+        body{max-width: 500px;margin:30px auto;font-family: sans-serif;}
+        td{border:2px solid red;width:160px;height:160px;text-align:center;font-size: 7em;}
+        .nl{border-left:2px solid white;}
+        .nb{border-bottom:2px solid white;}
+        .nr{border-right:2px solid white;}
+        .nt{border-top:2px solid white;}
+        h1{text-align: center;}
+    </style>
+</head>
+<body>
+    <table id="game">
+        <tr>
+            <td class='nt nl'></td>
+            <td class='nt'></td>
+            <td class='nt nr'></td>
+        </tr>
+        <tr>
+            <td class='nl'></td>
+            <td></td>
+            <td class='nr'></td>
+        </tr>
+        <tr>
+            <td class='nl nb'></td>
+            <td class='nb'></td>
+            <td class='nb nr'></td>
+        </tr>
+    </table>
+<script type="text/javascript">
+        var moves = 0;
+        var grid = document.getElementsByTagName('td');
+        function move(){
+            if(this.innerHTML==''){
+                moves+=1;
+                if(moves%2){
+                    this.innerHTML = 'X';
+                } else {
+                    this.innerHTML = 'O';
+                }
+            }
+            if(getWinner()=='X'){
+                alert('X wins!');
+                clearBoard();
+            }else if(getWinner()=='O'){
+                alert('O wins!');
+                clearBoard();
+            }
+        }
+        function clearBoard(){
+            for (var i = 0; i < grid.length; i++) {
+                grid[i].innerHTML='';
+            };
+        }
+        function ccToArr(){
+            var arr = [];
+            for (var i = 0; i < arguments.length; i++) {
+                arr.push(grid[arguments[i]].innerHTML)
+            };
+            return arr;
+        }
+        function allSame(arr){
+            var first = arr[0];
+            var same = true;
+            for (var i = 0; i < arr.length; i++) {
+                if(arr[i]!=first){
+                    same = false;
+                }
+            }
+            return same;
+        }
+        function getWinner(){
+            // 8 ways to win
+            if(allSame(ccToArr(0, 1, 2))){return grid[0].innerHTML;}
+            if(allSame(ccToArr(3, 4, 5))){return grid[3].innerHTML;}
+            if(allSame(ccToArr(6, 7, 8))){return grid[6].innerHTML;}
+            if(allSame(ccToArr(0, 3, 6))){return grid[0].innerHTML;}
+            if(allSame(ccToArr(1, 4, 7))){return grid[1].innerHTML;}
+            if(allSame(ccToArr(2, 5, 8))){return grid[2].innerHTML;}
+            if(allSame(ccToArr(0, 4, 8))){return grid[0].innerHTML;}
+            if(allSame(ccToArr(2, 4, 6))){return grid[2].innerHTML;}
+            return '';
+        }
+
+        function init(){
+            for (var i = 0; i < grid.length; i++) {
+                grid[i].onclick = move;
+            }
+        }
+        init();
+</script>
+    
+</body>
+</html>
