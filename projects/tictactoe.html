@@ -50,11 +50,24 @@
                 alert('O wins!');
                 clearBoard();
             }
+            if(catsGame()){
+                alert("Cat's game!");
+                clearBoard();
+            }
         }
         function clearBoard(){
             for (var i = 0; i < grid.length; i++) {
                 grid[i].innerHTML='';
             };
+        }
+        function catsGame(){
+            var allFull=true;
+            for (var i = 0; i < grid.length; i++) {
+                if(grid[i].innerHTML==''){
+                    allFull=false;
+                }
+            }
+            return allFull;
         }
         function ccToArr(){
             var arr = [];
