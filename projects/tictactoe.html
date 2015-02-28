@@ -50,17 +50,30 @@
                 alert('O wins!');
                 clearBoard();
             }
-            if(catsGame()){
+            if(isCatsGame()){
                 alert("Cat's game!");
                 clearBoard();
             }
         }
+
+        // window.onbeforeunload = function() {
+        //     if(!emptyBoard()){
+        //         confirm('Are you sure?');
+        //     }
+        // }
+        // function emptyBoard(){
+        //     for (var i = 0; i < grid.length; i++) {
+        //         if(grid[i].innerHTML!=''){return false;}
+        //     }
+        //     return true;
+        // }
+
         function clearBoard(){
             for (var i = 0; i < grid.length; i++) {
                 grid[i].innerHTML='';
             };
         }
-        function catsGame(){
+        function isCatsGame(){
             var allFull=true;
             for (var i = 0; i < grid.length; i++) {
                 if(grid[i].innerHTML==''){
@@ -69,14 +82,10 @@
             }
             return allFull;
         }
-        function ccToArr(){
-            var arr = [];
-            for (var i = 0; i < arguments.length; i++) {
-                arr.push(grid[arguments[i]].innerHTML)
-            };
-            return arr;
-        }
-        function allSame(arr){
+        function allSame(p1,p2,p3){
+            var arr = [ grid[p1].innerHTML,
+                        grid[p2].innerHTML,
+                        grid[p3].innerHTML ];
             var first = arr[0];
             var same = true;
             for (var i = 0; i < arr.length; i++) {
@@ -88,14 +97,14 @@
         }
         function getWinner(){
             // 8 ways to win
-            if(allSame(ccToArr(0, 1, 2))){return grid[0].innerHTML;}
-            if(allSame(ccToArr(3, 4, 5))){return grid[3].innerHTML;}
-            if(allSame(ccToArr(6, 7, 8))){return grid[6].innerHTML;}
-            if(allSame(ccToArr(0, 3, 6))){return grid[0].innerHTML;}
-            if(allSame(ccToArr(1, 4, 7))){return grid[1].innerHTML;}
-            if(allSame(ccToArr(2, 5, 8))){return grid[2].innerHTML;}
-            if(allSame(ccToArr(0, 4, 8))){return grid[0].innerHTML;}
-            if(allSame(ccToArr(2, 4, 6))){return grid[2].innerHTML;}
+            if(allSame(0,1,2)){return grid[0].innerHTML;}
+            if(allSame(3,4,5)){return grid[3].innerHTML;}
+            if(allSame(6,7,8)){return grid[6].innerHTML;}
+            if(allSame(0,3,6)){return grid[0].innerHTML;}
+            if(allSame(1,4,7)){return grid[1].innerHTML;}
+            if(allSame(2,5,8)){return grid[2].innerHTML;}
+            if(allSame(0,4,8)){return grid[0].innerHTML;}
+            if(allSame(2,4,6)){return grid[2].innerHTML;}
             return '';
         }
 
