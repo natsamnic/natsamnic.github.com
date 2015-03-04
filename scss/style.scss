@@ -32,3 +32,10 @@ i{
     line-height: 2.4rem;
     text-align: justify;
 }
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+    #poetry{
+        font-size: 1rem;
+    }
+}
