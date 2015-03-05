@@ -1,0 +1,20 @@
+@import "settings";
+@import "foundation";
+
+.center{
+    text-align:center;
+}
+.text-align-right{
+    text-align: right;
+} 
+.inline-list{
+    padding-top:2em;
+    font-size: 1.3em;
+}
+body{
+    background: url('../img/bg1.png') repeat;
+}
+
+.fancy{
+    border:none;
+}
