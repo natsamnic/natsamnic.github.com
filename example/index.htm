@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <style type="text/css">
+        video{
+            width:700px;
+        }
+    </style>
+</head>
+<body>
+<h2>Participant View</h2>
+<a href="coach.html">Coach View</a> <hr>
+    <video id='vid1' width="640" height="480" controls>
+        <source src="vid2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <p class="notes">
+        <ul>
+            <li><a onclick='play(2);' href='#'>  2 seconds in</a> - This is a sample note</li>
+            <li><a onclick='play(5);' href='#'>  5 seconds in</a> - Cute baby!</li>
+            <li><a onclick='play(9);' href='#'>  9 seconds in</a> - It was over too quickly...</li>
+        </ul>
+    </p>
+    <script type="text/javascript">
+
+        var video = document.getElementById('vid1');
+        function play(time){
+              video.currentTime = time;
+              video.play(time);
+          }
+
+        var notes = [{"time":"2","note":"This is a sample note"},
+                     {"time":"5","note":"Cute baby!"},
+                     {"time":"9","note":"It was over too quickly..."}]
+        for (var i = 0; i < notes.length; i++) {
+            console.log(notes[i])
+
+        }
+    </script>
+</body>
+</html>
