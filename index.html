@@ -1,105 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Resume</title>
+---
+layout: default
+section: blog
+---
 
-  <style type="text/css">
-    body{
-      margin:0 auto;
-      max-width:980px;
-      font-family: sans-serif;
-      padding: 20px;
-    }
-  </style>
-</head>
-<body>
-  <h3>Resum&eacute;</h3>
+<div class='listing col6 pad4h margin3'>
+  {% for item in site.categories.blog limit:1000 %}
+    {% capture date %}{{ item.date | date: '%B %Y' }}{% endcapture %}
+    {% capture ndate %}{{ item.next.date | date: '%B %Y' }}{% endcapture %}
 
-                    <h3>Who?</h3>
-                    <p>
-                    Nate is a bilingual digital artist and musician from the West Coast with a BA in Computer and Information Science. Nate currently holds the position of Data Analyst II at the Oregon Research Institute where he builds domain-specific Django web applications.
-                    </p>
+    {% if date != ndate %}
+      <h4 class='month'>{{item.date | date: '%B %Y'}}</h4>
+    {% endif %}
+    <a class='item' href='{{site.baseurl}}{{item.url}}'>{{item.title}} <span class='date'>&#126; {{item.date | date:"%b %d"}}</span></a>
+  {% endfor %}
+</div>
 
-
-<h5>EDUCATION</h5>
-<hr>
-<table>
-    <tr>
-        <td>BA</td>
-        <td>Computer and Information Science at University of Oregon</td>
-    </tr>
-    <tr>
-        <td>AAOT</td>
-        <td>Lane Community College</td>
-    </tr>
-</table>
-
-<h5>WORK EXPERIENCE</h5>
-<hr>
-<table>
-    <tr>
-        <td>9/13/13 - now</td>
-        <td><b>Web Developer at Oregon Research Institute</b><br>
-<em>Refactoring legacy PHP code. Implementation of Foundation 4 grid based mobile layout. MySQL, Javascript, HTML5, CSS3, PHP, LESS, UI/UX.</em></td>
-    </tr>
-    <tr>
-        <td>9/30/13 - 1/1/15</td>
-        <td>
-<b>College Instructor at Pioneer Pacific College</b><br>
-<em>Teaching TCP/IP, Network Design, Web Design, Visual Basic, and SQL</em></td>
-    </tr>
-    <tr>
-        <td>7/1/13 - 8/1/13</td>
-        <td><b>Internship at International Society for Technology in Education</b><br>
-<em>Installed Point of Sale software and configured laptops for schools</em></td>
-    </tr>
-    <tr>
-        <td>6/2011 - 7/2012</td>
-        <td><b>Graphic/Web Designer at UplinkSpyder.com</b><br>
-<em>Social media graphics, web design, print material, design guides for brand consistency, video editing. Worked on initial site design for bruceberg.com. Implemented jQuery slider on europeanrn.com.</em></td>
-    </tr>
-    <tr>
-        <td>9/2009 - 6/2011</td>
-        <td><b>Activities Instructor for the City of Eugene</b><br>
-<em>Immersion style Spanish instruction at Edison Elem. Assisted in running B.E.S.T. after school program at River Rd. Elem. (taught music, soccer, origami and art) Rec. lead at Fun4All, Sladden park.</em></td>
-    </tr>
-    <tr>
-        <td>9/2008 - 9/2011</td>
-        <td><b>Spanish Teacher at Willow Creek Academy</b><br>
-<em>Immersion style Spanish instruction, Elective Courses (photography, web design, circus arts) Made promotional video for the school.</em></td>
-    </tr>
-    <tr>
-        <td>1/2007 - 6/2008</td>
-        <td>
-<b>Graphic Designer at Hands of Mercy, Jerusalem, Israel</b><br>
-<em>Creative input, poster creation, Letterhead. Logo and web development advising. Cross cultural work environment.</em></td>
-    </tr>
-</table>
-
-
-<h5>TRAVEL</h5>
-<hr>
-<p>Colómbia*, Denmark, Dominican Republic*, Ecuador, Egypt, El Salvador, England, Estonia, Finland, France, Germany, Gibraltar, Guatemala, Honduras, Hungary, Ireland, Israel*, Italy, Jordan, Mexico, Morocco, Norway, Poland, Russia, Spain*, and Sweden. <br>* = Lived in these countries 1 month to 2 years. </p>
-
-                </div>
-              </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row animated fadeIn">
-        <div class="small-4 columns"><a href="http://github.com/natsn">
-        <center><i class="fa fa-github fa-5x"></i></center></a></div>
-        <div class="small-4 columns"><a href="http://twitter.com/natsamnic">
-        <center><i class="fa fa-twitter fa-5x"></i></center></a></div>
-        <div class="small-4 columns"><a href="https://soundcloud.com/natandria0">
-        <center><i class="fa fa-soundcloud fa-5x"></i></center></a></div>
-    </div>
-    <div class="row">
-        <div class="large-12 columns">
-        <br>
-            <p>Made with love. &copy; 2015</p>
-        </div>
-    </div>
-</body>
-</html>
+{% include rss-link.html %}
