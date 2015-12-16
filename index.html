@@ -1,18 +1,57 @@
----
-layout: default
-section: blog
----
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Hello</title>
+		<style>
+			html {
+  background: url(bg.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
-<div class='listing col6 pad4h margin3'>
-  {% for item in site.categories.blog limit:1000 %}
-    {% capture date %}{{ item.date | date: '%B %Y' }}{% endcapture %}
-    {% capture ndate %}{{ item.next.date | date: '%B %Y' }}{% endcapture %}
+/* Dashes are cooler than bullets */
+ul { list-style-type: none; }
+ul li:before { content:"-"; position: relative; left:-5px;}
+ul li { text-indent:-5px; }
 
-    {% if date != ndate %}
-      <h4 class='month'>{{item.date | date: '%B %Y'}}</h4>
-    {% endif %}
-    <a class='item' href='{{item.url}}'>{{item.title}} <span class='date'>&#126; {{item.date | date:"%b %d"}}</span></a>
-  {% endfor %}
-</div>
 
-{% include rss-link.html %}
+a, a:visited, a:hover{
+  color:#111;
+  font-weight: bold;
+}
+a:hover{
+  background:yellow;
+}
+
+body{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #000;
+  margin: 0 auto;
+  padding:1em;
+  letter-spacing: .1em;
+  max-width: 400px;
+}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 id="hello">Hello</h1>
+<h2 id="feast-your-eyes-">Feast your eyes...</h2>
+<ul>
+<li><a href="folp/index.htm">Folp</a> <em>A minimalistic puzzle game inspired by Folt written to demonstrate Backbone, Underscore and Handlebars in a fun way. (<a href="">source</a>)</em></li>
+<li><a href="#babyglass">BabyGlass</a> <em>Pilot project that combines two video files from 
+google glass and android tablet into one file using ffmpeg.</em></li>
+<li><a href="#sayshake">sayshake</a> <em>A volitile social network where time is money and content fades.</em></li>
+<li>?</li>
+</ul>
+
+		</div>
+
+		<script></script>
+	</body>
+</html>

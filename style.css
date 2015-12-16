@@ -1,0 +1,32 @@
+html {
+  background: url(bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* Dashes are cooler than bullets */
+ul { list-style-type: none; }
+ul li:before { content:"-"; position: relative; left:-5px;}
+ul li { text-indent:-5px; }
+
+
+a, a:visited, a:hover{
+  color:#111;
+  font-weight: bold;
+}
+a:hover{
+  background:yellow;
+}
+
+body{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #000;
+  margin: 0 auto;
+  padding:1em;
+  letter-spacing: .1em;
+  max-width: 400px;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Folp</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="assets/animate.css">
+
+</head>
+<body>
+
+<a href="../index.html">< back</a> <br> <hr> <br>
+  <!-- <center><h1 class='animated bounceInDown'>Folp</h1></center> -->
+  <div id="game"></div>
+
+  <script id="folp" type="text/x-handlebars-template">
+  <div id="the_game">
+    <div class='top'>
+    {{#each deck}}
+      <div class="tile c{{ this }} deck"></div>
+    {{/each}}<b>Score:</b> {{ score }} <b>Best: </b>{{ top_score }}
+    </div>
+    <div id='grid'>
+     {{#each grid}}
+      {{#each this}}
+        <div class="game_tile c{{this}}"></div>
+      {{/each}}
+      <div></div>
+     {{/each}}
+     </div>
+  </div>
+
+ {{!--
+
+  <ul>
+  {{#each scores}}
+    <li>{{ score }}</li>
+  {{/each}}
+  </ul>
+
+--}}
+  </script>
+
+  <!-- <center>
+    <p class='animated flipInX small' ><strong>instructions</strong><br> Place tiles across the board using your arrow keys. <br> Keep an eye on the tiles on deck to plan your next move.<br>Score points and clear space by grouping similar colored tiles. </p>
+  </center> -->
+  <script src="assets/moment.js"></script>
+  <script src="assets/jquery-1.11.2.min.js"></script>
+  <script src="assets/underscore-min.js"></script>
+  <script src="assets/handlebars-v3.0.0.js"></script>
+  <script src="assets/backbone-min.js"></script>
+  <script src="folp.js"></script>
+
+</body>
+</html>

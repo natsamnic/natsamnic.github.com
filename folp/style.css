@@ -1,0 +1,84 @@
+body{
+  font-family: sans-serif;
+  background:#eee;
+  margin: 0 auto;
+  padding:20px;
+  max-width: 600px;
+  font-family: 'Source Code Pro', monospaced;
+}
+
+#grid {
+  width:300px;
+}
+.score{
+  font-size: 20px;
+}
+.top{
+  font-size: 20px;
+  clear:both;
+  margin-bottom: 10px;
+}
+.tile{
+  width: 20px;
+  height: 20px;
+  float:left;
+  margin-right:6px;
+  color:white;
+  font-size: .5em;
+}
+.game_tile{
+  width: 50px;
+  height: 50px;
+  float:left;
+  color:white;
+}
+.c0{
+  background-color: white;
+}
+.c1{
+  background-color: pink;
+}
+.c2{
+  background-color: lightgreen;
+}
+.c3{
+  background-color: lightblue;
+}
+.cX1{
+  background-color: pink;
+}
+.cX2{
+  background-color: lightgreen;
+}
+.cX3{
+  background-color: lightblue;
+}
+.scores{
+  font-size: 15px;
+}
+.scores li{
+  list-style: none;
+  display: inline;
+}
+.deck:first-child{
+  width: 25px;
+  height: 25px;
+}
+.small{
+  font-size: 13px;
+}
+
+/*UI stuff*/
+
+/* Dashes are cooler than bullets */
+ul { list-style-type: none; }
+ul li:before { content:"-"; position: relative; left:-5px;}
+ul li { text-indent:-5px; }
+
+a, a:visited, a:hover{
+  color:#111;
+  font-weight: bold;
+}
+a:hover{
+  background:yellow;
+}
