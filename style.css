@@ -1,9 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,900);
+
 html {
-  background: url(bg.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: url(bg.png) repeat fixed;
 }
 
 /* Dashes are cooler than bullets */
@@ -21,12 +19,11 @@ a:hover{
 }
 
 body{
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Code Pro', sans-serif;
   font-size: 1em;
   font-weight: 400;
   color: #000;
   margin: 0 auto;
   padding:1em;
-  letter-spacing: .1em;
   max-width: 400px;
 }

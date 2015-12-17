@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>folp.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>folp.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/*
+  Folp
+  A minimalist puzzle game
+
+  INSTRUCTIONS
+  Use arrow keys to color squares in different directions. If you make 10
+  matches you win. If you get stuck you lose. The next three square colors are
+  on deck. Use this knowledge to plan you next moves. Enjoy the 6x6 grid!
+
+*/</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>This generates a random position for our board</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">randPos</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">return</span> [<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random()*<span class="hljs-number">100</span>)%<span class="hljs-number">6</span>,
+          <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random()*<span class="hljs-number">100</span>)%<span class="hljs-number">6</span>];
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>This returns a random value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">randVal</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">return</span> (<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random()*<span class="hljs-number">100</span>)%<span class="hljs-number">3</span>)+<span class="hljs-number">1</span>;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>TODO use localStorage!</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>This is a backbone model to keep track of game state</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> GridModel = Backbone.Model.extend({
+  defaults:{
+    deck:[],
+    grid:[[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],
+          [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],
+          [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],
+          [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],
+          [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],
+          [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]],
+    position:[],
+    score:<span class="hljs-number">0</span>,
+    scores:[],
+    top_score: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.scores.length &gt; <span class="hljs-number">0</span>) {
+          <span class="hljs-keyword">return</span> _(<span class="hljs-keyword">this</span>.scores).chain().map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">s</span>)</span>{<span class="hljs-keyword">return</span> _(s).values()}).reduce(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,b</span>)</span>{<span class="hljs-keyword">return</span> a.concat(b)}).max().value();
+        } <span class="hljs-keyword">else</span> {
+          <span class="hljs-keyword">return</span> <span class="hljs-string">';)'</span>;
+        }
+      }
+  },
+  initialize: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.set(<span class="hljs-string">'position'</span>, randPos());
+    <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'grid'</span>)[<span class="hljs-keyword">this</span>.get(<span class="hljs-string">'position'</span>)[<span class="hljs-number">0</span>]][<span class="hljs-keyword">this</span>.get(<span class="hljs-string">'position'</span>)[<span class="hljs-number">1</span>]] = randVal(); <span class="hljs-comment">// why does this work?</span>
+    <span class="hljs-keyword">this</span>.set(<span class="hljs-string">'deck'</span>,[randVal(),randVal(),randVal()]);
+  }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>This is the game view that ties to handlebars</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> GridGameView = Backbone.View.extend({
+  el:<span class="hljs-string">'#game'</span>,
+  template: Handlebars.compile($(<span class="hljs-string">'#folp'</span>).html()),
+  initialize: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    _.bindAll(<span class="hljs-keyword">this</span>,<span class="hljs-string">'keyAction'</span>);
+    $(<span class="hljs-built_in">document</span>).bind(<span class="hljs-string">'keydown'</span>, <span class="hljs-keyword">this</span>.keyAction);
+  },
+  render: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">this</span>.$el.html(<span class="hljs-keyword">this</span>.template(<span class="hljs-keyword">this</span>.model.attributes));
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  },
+  keyAction: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.positionsAvailable()==<span class="hljs-number">0</span>){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>TODO Append this to the bottom of the board</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'score'</span>)+<span class="hljs-string">':'</span>+<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());
+      <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'scores'</span>,[{score:<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'score'</span>)}].concat(<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'scores'</span>)));
+      <span class="hljs-keyword">var</span> s = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'scores'</span>);
+      <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'scores'</span>, _.sortBy(s).reverse().slice(<span class="hljs-number">0</span>,<span class="hljs-number">12</span>));
+      <span class="hljs-keyword">this</span>.reset();
+      <span class="hljs-keyword">this</span>.render()
+    }
+    <span class="hljs-keyword">var</span> code = e.keyCode || e.which;
+    <span class="hljs-keyword">var</span> target = [];
+    <span class="hljs-keyword">var</span> x = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'position'</span>)[<span class="hljs-number">0</span>],
+        y = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'position'</span>)[<span class="hljs-number">1</span>];
+    <span class="hljs-keyword">if</span>(code===<span class="hljs-number">38</span>) target = [x<span class="hljs-number">-1</span>,y];
+    <span class="hljs-keyword">if</span>(code===<span class="hljs-number">40</span>) target = [x+<span class="hljs-number">1</span>,y];
+    <span class="hljs-keyword">if</span>(code===<span class="hljs-number">39</span>) target = [x,y+<span class="hljs-number">1</span>];
+    <span class="hljs-keyword">if</span>(code===<span class="hljs-number">37</span>) target = [x,y<span class="hljs-number">-1</span>];
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.validPosition(target)){
+      <span class="hljs-keyword">var</span> val = <span class="hljs-keyword">this</span>.nextVal();
+      <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'position'</span>,target);
+      <span class="hljs-keyword">var</span> g = _.clone(<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'grid'</span>));
+      g[target[<span class="hljs-number">0</span>]][target[<span class="hljs-number">1</span>]] = val;
+      <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'grid'</span>, g);
+      <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.madeMatch(target)){
+        <span class="hljs-keyword">this</span>.floodFill(<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'grid'</span>), target[<span class="hljs-number">1</span>], target[<span class="hljs-number">0</span>], <span class="hljs-literal">null</span>, <span class="hljs-number">0</span>);
+        g[target[<span class="hljs-number">0</span>]][target[<span class="hljs-number">1</span>]] = val;
+        <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'grid'</span>, g);
+      }
+      <span class="hljs-keyword">this</span>.render();
+    }
+  },
+  contains: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">array,stuff</span>)</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; array.length; i++) {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; stuff.length; j++) {
+        <span class="hljs-keyword">if</span>(array[i]==stuff[j]) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  },
+  validPosition: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">p</span>)</span>{
+    <span class="hljs-keyword">var</span> available = <span class="hljs-keyword">this</span>.positionsAvailable()
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; available.length; i++) {
+      <span class="hljs-keyword">if</span>(available[i][<span class="hljs-number">0</span>]==p[<span class="hljs-number">0</span>]&amp;&amp;available[i][<span class="hljs-number">1</span>]==p[<span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+  },
+  positionsAvailable: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Returns and array of valid position arrays</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> y = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'position'</span>)[<span class="hljs-number">0</span>],
+        x = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'position'</span>)[<span class="hljs-number">1</span>],
+        self = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">return</span> [[y,x+<span class="hljs-number">1</span>],
+            [y,x<span class="hljs-number">-1</span>],
+            [y+<span class="hljs-number">1</span>,x],
+            [y<span class="hljs-number">-1</span>,x]].filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">p</span>)</span>{
+              <span class="hljs-keyword">return</span> !self.contains(p,[<span class="hljs-number">-1</span>,<span class="hljs-number">6</span>])
+               &amp;&amp; self.model.get(<span class="hljs-string">'grid'</span>)[p[<span class="hljs-number">0</span>]][p[<span class="hljs-number">1</span>]]===<span class="hljs-number">0</span>;
+            });
+  },
+  movesAvailable: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Returns an array of possible valid keycodes</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.positionsAvailable().map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">coord</span>)</span>{
+      <span class="hljs-keyword">var</span> y = self.model.get(<span class="hljs-string">'position'</span>)[<span class="hljs-number">0</span>],
+          x = self.model.get(<span class="hljs-string">'position'</span>)[<span class="hljs-number">1</span>],
+          cy = coord[<span class="hljs-number">0</span>],
+          cx = coord[<span class="hljs-number">1</span>];
+      <span class="hljs-keyword">if</span>(y<span class="hljs-number">-1</span>==cy) <span class="hljs-keyword">return</span> <span class="hljs-number">38</span>;
+      <span class="hljs-keyword">if</span>(y+<span class="hljs-number">1</span>==cy) <span class="hljs-keyword">return</span> <span class="hljs-number">40</span>;
+      <span class="hljs-keyword">if</span>(x<span class="hljs-number">-1</span>==cx) <span class="hljs-keyword">return</span> <span class="hljs-number">37</span>;
+      <span class="hljs-keyword">if</span>(x+<span class="hljs-number">1</span>==cx) <span class="hljs-keyword">return</span> <span class="hljs-number">39</span>;
+    });
+  },
+  nextVal: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>dequeue color and enqueue random one.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> curr = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'deck'</span>)[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">var</span> d1 = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'deck'</span>)[<span class="hljs-number">1</span>];
+    <span class="hljs-keyword">var</span> d2 = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'deck'</span>)[<span class="hljs-number">2</span>];
+    <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'deck'</span>,[d1,d2,randVal()]);
+    <span class="hljs-keyword">return</span> curr;
+  },
+  adjDups: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">position</span>)</span>{
+    <span class="hljs-keyword">var</span> y = position[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">var</span> x = position[<span class="hljs-number">1</span>];
+    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">return</span> [[y,x+<span class="hljs-number">1</span>],[y,x<span class="hljs-number">-1</span>],[y+<span class="hljs-number">1</span>,x],[y<span class="hljs-number">-1</span>,x]].filter(
+          <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">p</span>)</span>{
+            <span class="hljs-keyword">return</span> !self.contains(p,[<span class="hljs-number">-1</span>,<span class="hljs-number">6</span>]) &amp;&amp;
+            self.model.get(<span class="hljs-string">'grid'</span>)[p[<span class="hljs-number">0</span>]][p[<span class="hljs-number">1</span>]]==
+            self.model.get(<span class="hljs-string">'grid'</span>)[y][x];
+          });
+  },
+  coordIn: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">array, coord</span>)</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; array.length; i++) {
+      <span class="hljs-keyword">if</span>(array[i][<span class="hljs-number">0</span>]==coord[<span class="hljs-number">0</span>] &amp;&amp; array[i][<span class="hljs-number">1</span>]==coord[<span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  },
+  madeMatch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">start</span>)</span>{
+
+    <span class="hljs-keyword">var</span> l0 = <span class="hljs-keyword">this</span>.adjDups(start);
+    <span class="hljs-keyword">if</span>(l0.length&gt;=<span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+
+    <span class="hljs-keyword">var</span> treasure = [start];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; l0.length; i++) {
+      <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">this</span>.coordIn(treasure, l0[i])) treasure.push(l0[i]);
+      <span class="hljs-keyword">var</span> search_set = <span class="hljs-keyword">this</span>.adjDups(l0[i]);
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = <span class="hljs-number">0</span>; k &lt; search_set.length; k++) {
+        <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">this</span>.coordIn(treasure, search_set[k])) treasure.push(search_set[k]);
+      }
+      search_set = []
+    }
+
+    <span class="hljs-keyword">return</span> treasure.slice(<span class="hljs-number">1</span>,treasure.length).length&gt;=<span class="hljs-number">2</span>;
+  },
+  floodFill: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">mapData, x, y, oldVal, newVal</span>)</span>{
+    <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'score'</span>,<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'score'</span>)+<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">var</span> mapWidth = mapData.length,
+        mapHeight = mapData[<span class="hljs-number">0</span>].length;
+
+    <span class="hljs-keyword">if</span>(oldVal == <span class="hljs-literal">null</span>) oldVal = mapData[y][x];
+    <span class="hljs-keyword">if</span>(mapData[y][x] !== oldVal) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+
+    mapData[y][x] = newVal;
+
+    <span class="hljs-keyword">if</span>(x &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">this</span>.floodFill(mapData, x<span class="hljs-number">-1</span>, y, oldVal, newVal); <span class="hljs-comment">// left</span>
+    <span class="hljs-keyword">if</span>(y &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">this</span>.floodFill(mapData, x, y<span class="hljs-number">-1</span>, oldVal, newVal); <span class="hljs-comment">// up</span>
+    <span class="hljs-keyword">if</span>(x &lt; mapWidth<span class="hljs-number">-1</span>)  <span class="hljs-keyword">this</span>.floodFill(mapData, x+<span class="hljs-number">1</span>, y, oldVal, newVal); <span class="hljs-comment">// right</span>
+    <span class="hljs-keyword">if</span>(y &lt; mapHeight<span class="hljs-number">-1</span>) <span class="hljs-keyword">this</span>.floodFill(mapData, x, y+<span class="hljs-number">1</span>, oldVal, newVal); <span class="hljs-comment">// down</span>
+  },
+  reset: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">var</span> g1 = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'grid'</span>);
+    <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'position'</span>, randPos());
+    <span class="hljs-keyword">var</span> p = <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">'position'</span>);
+    <span class="hljs-keyword">var</span> g2 = g1.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">r</span>)</span>{<span class="hljs-keyword">return</span> [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>];});
+    g2[p[<span class="hljs-number">0</span>]][p[<span class="hljs-number">1</span>]] = randVal();
+    <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'grid'</span>, g2);
+    <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'score'</span>, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">this</span>.model.set(<span class="hljs-string">'deck'</span>,[randVal(),randVal(),randVal()]);
+  }
+});
+
+Handlebars.registerHelper(<span class="hljs-string">'first'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">context, every, options</span>) </span>{
+  <span class="hljs-keyword">var</span> fn = options.fn, inverse = options.inverse;
+
+  <span class="hljs-keyword">return</span> ret;
+});
+
+<span class="hljs-keyword">var</span> grid = <span class="hljs-keyword">new</span> GridModel();
+<span class="hljs-keyword">var</span> game = <span class="hljs-keyword">new</span> GridGameView({model: grid});
+game.listenTo(grid, <span class="hljs-string">'change'</span>, game.render);
+
+game.render();</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
